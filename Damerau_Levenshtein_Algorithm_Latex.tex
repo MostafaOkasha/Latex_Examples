@@ -1,0 +1,166 @@
+% This is the code for the 3I03 Assignment 4 Algorithm explanation
+% Mostafa Okasha - 001304347 - March - 03 - 2017
+
+\documentclass[12pt]{article}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+    \setlength{\topmargin}{-0.2in}
+	\addtolength{\oddsidemargin}{-.875in}
+	\addtolength{\evensidemargin}{-.875in}
+	\addtolength{\textwidth}{1.5in}
+	\addtolength{\topmargin}{-.875in}
+	\addtolength{\textheight}{1.75in}
+
+
+\title{3I03 Assignment: Explain an Algorithm}
+\author{}
+\date{March - 15 - 2017}
+\author{Mostafa Okasha - 1304347 \\ Written in \LaTeX{}}
+\begin{document}
+\maketitle
+\vspace{50mm} %5mm vertical space
+\setlength{\parindent}{3.5cm}
+\hangindent=3.5cm 
+\hspace{16 mm} Damerau-Levenshtein Distance Algorithm
+
+\newpage
+
+\section*{Section 1: Introduction}
+\subsection*{About Me:}
+\setlength{\parindent}{1.5cm}
+\vspace{5mm} %5mm vertical space
+
+My name is Mostafa Okasha (as can be seen from the title page) and I have been studying Mechatronics Engineering at McMaster University for almost 4 years now. My experience, relative to this algorithm, is sadly not that well developed. Even though I have taken several programming courses such as Operating Systems, Programming Principles, Software Development and Engineering Computation, the relevant complexity of this algorithm was still a little difficult to wrap my head around.\cite{mostafaokasha}
+    
+\subsection*{History:}
+
+In this paper I explain to you how the Damerau-Levenshtein Distance Algorithm works, it's history, how it came to be of use and how it is used today and in many other algorithms and products.
+
+\vspace{2.5mm} %5mm vertical space
+
+The Damerau-Levenshtein Distance Algorithm is an algorithm that has been modified to add another functionality whereby the original algorithm, named the Levenshtein Distance Algorithm , was developed by Vladimir Levenshtein in 1965.\cite{wiki1} Later on, Frederick J. Damerau, added the functionality to the original algorithm and published a paper explaining his changes. \cite{article}
+
+\subsection*{About the Algorithm:}
+
+To explain the Damerau-Levenshtein Distance Algorithm in this paper, I have used the Algorithmic Notation from the book: Introduction To Algorithms.\cite{book} I have also made a lot of references to explain the algorithm from the book: C Damerau-Levenshtein Distance by: P. Miller, F. Vandome and J. McBrewster \cite{book2}
+
+
+\vspace{2.5mm} %5mm vertical space
+
+The Damerau-Levenshtein Distance Algorithm is an algorithm used to compare two strings, and relatively tell you how similar both strings are by computing the Damerau-Levenshtein Distance. Basically, it finds out how many minimal insertions, deletions or substitutions of a single character, or transposition of two adjacent characters would be required in order for both strings to be exactly the same (i.e. Change word word to be exactly like the other using only those functions).Considering a point system, inserting one letter into the word would count as 1 point. Deleting one letter from the word would count as 1 point. Substituting one character into another (switching) would also count as one point. And the final functionality is transposing two characters that are adjacent to one another. (substituting two characters which are beside each other). However, as the algorithm tries to find the MINIMUM number of operations required to do so, it becomes a little more complicated whereby each operation has to be drawn out in a 2D array in comparison with every other possible operation to find out whether or not that operation is indeed the most minimal one.\cite{book2} 
+
+\newpage
+
+\section*{Section 2: How it does it and Examples}
+
+\begin{wrapfigure}{r}{0.25\textwidth} %this figure will be at the right
+    \centering
+    \includegraphics[width=0.25\textwidth]{test.png}
+\end{wrapfigure}
+
+
+    Overall, the complexity of the Damerau-Levenshtein Distance Algorithm is greatly reduced after introducing the "Damerau" part into it which is the transposing. Consider the figure to the right. This figure shows that it will require 1 Damerau-Levenshtein operation in order to transform the word "rick" into the word "rcik". Seeing that the transposition will occur between both the letters 'i' and 'c'. Where the complexity comes in is how the algorithm will decide that this is is even possible and faster than having two substitutions of letters as in the letter c is replaced with an external letter i and the letter i is replaced with an external letter c which is indeed a two step process. On the other hand, converting 'rick to 'irkc' would require two transpositions between 'ri' and 'ks' thus giving a  Damerau-Levenshtein Distance of 2. Finally, transforming 'rcik' to 'irkc' would require 4 steps for the same reasons. Another example would be the Levenshtein distance between "kitten" and "sitting" as being 3, since the following three edits change one into the other, and there is no way to do it with fewer than three edits:
+
+\begin{itemize}
+\item kitten →sitten (substitution of "s" for "k")
+\item kitten → sittin (substitution of "i" for "e")
+\item kitten → sitting(insertion of "g" at the end) \cite{wiki1} 
+\end{itemize}
+
+\subsection*{Current Uses:}
+Frederick J. Damerau has previously mentioned in his paper that almost 80\%{} of human typing errors could be corresponded to the four operations that the Damerau-Levenshtein Distance Algorithm presents. Thus began the many uses of this algorithm as we list a few uses below:
+
+\begin{itemize}
+\item As J. Damerau mentioned before, 80\%{} of spelling mistakes can be accounted for by this algorithm and so, its main use was seen in spell checks originally developed for IBM actually where IBM had a patent over the algorithm. \cite{book} 
+\item Since DNAs experience transposition (where two Alleles switch), substitution, deletion and insertion, this algorithm is also used in bio-informatics to compare similar DNA structures. \cite{article} 
+\item Typo-squatting is a famous form of hacking whereby the hackers try to perform fishing on famous websites whereby they would create a website that is exactly similar to a famous website but the only thing would differ is a single word or words in the URL of the website. For example, 'facebook' and facenook' where by this error is probably made my thousands of people worldwide which will cause them to continue to the website and that's where the fisihing occurs. \cite{book2} 
+\end{itemize}
+
+
+\newpage
+\section*{Section 3: pseudocode of the Algorithm}
+
+Although the Damerau-Levenshtein Distance Algorithm may be very easy from a practical use, its implementation is quite difficult. A pseudocode of the algorithm is written below explains exactly what is going on in each step. \cite{book2} 
+
+\lstset{language=Pascal}          % Set your language (you can change the language for each code-block optionally)
+
+\vspace{3.5mm} %5mm vertical space
+
+\begin{algorithm}
+\caption{Damerau-Levenshtein Distance Algorithm}\label{DL}
+\begin{algorithmic}[1]
+\Procedure{Computing\_{}minimum\_{}distance}{}
+
+\BState \textbf{input:} \emph{string A[1..A.length], string B[1..B.length]}
+
+\BState \textbf{output:} \emph{integer distance}
+
+\State \emph{temp[0..A.length,0..B.length] //created a temporary 2D array}
+\State \emph{integer i, cost // i used to iterate and cost to compare strings}
+\State
+\BState \textbf{for} \emph{i = 0} \textbf{to} \emph{A.length}
+\State \emph{temp[i,0] = i //creating our 2D array to initialize the valyes for both sides of the strings}
+\State
+\BState \textbf{for} \emph{j = 0} \textbf{to} \emph{B.length}
+\State \emph{temp[0,j] = j //same as above}
+\State
+
+\BState \textbf{for} \emph{i = 0} \textbf{to} \emph{A.length //for loop to iterate through all first string}
+\State \textbf{for} \emph{j = 0} \textbf{to} \emph{B.length //the second for loop for the second string}
+\State
+
+\State \textbf{if} \emph{A[i] = B[i]} 
+\State \textbf{  }\emph{cost = 0} 
+\State \textbf{else}
+\State \textbf{  }\emph{cost = 1}
+\State \emph{// This is basically the main comparison between the strings. if both letters aren't exactly the same then we will require 1 distance in order to fix that. This is all that's required to compute the distance however, if you need to understand how the comparison is executed to change the strings, that's when the following code is important }
+\State
+
+\State \textbf{temp[A.length,B.length]} \emph{ = minimum(deletion(A[i],B[i]), insertion(A[i],B[i]), substitution(A[i],B[i]), transposition(A[i],B[i])) } 
+
+\State
+\State \textbf{return} \emph{temp[A.length,B.length]} 
+
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+    
+\newpage
+
+\begin{thebibliography}{9}
+
+\bibitem{mostafaokasha} 
+LinkedIn Account: Mostafa Okasha,
+\\\texttt{https://www.linkedin.com/in/mostafaokasha/}
+
+\bibitem{wiki1} 
+Wikipedia Article: Levenshtien Distance Algorithm,
+\\\texttt{https://en.wikipedia.org/wiki/Levenshtein\_{}distance/}
+
+\bibitem{article} 
+Patrick A. V. Hall, Geoff R. Dowling,
+ Approximate String Matching
+\textit{ACM Computing Surveys CSUR Surveys Homepage archive}.
+Volume 12 Issue 4, Dec. 1980 Pages 381-402 
+
+\bibitem{book} 
+T. H. Cormen, C. E. Leiserson, R. Rivest, and C. Stein, “Algorithmen - Eine Einführung,” 2017.
+
+\bibitem{book2} 
+Damerau-Levenshtein Distance by: P. Miller, F. Vandome and J. McBrewster, 2013
+
+
+
+\end{thebibliography}
+\end{document}
